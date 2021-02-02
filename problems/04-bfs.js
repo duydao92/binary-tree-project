@@ -3,7 +3,7 @@
 // order, and returns an array containing the values
 // in the order you visited them.
 
-function bfs(root, result=[], queue=[root.val]){
+function bfs(root, result=[], queue=[root]){
     // initialize [] starting at root;
     // shift the parent from queue []
         // push that shift into result array
@@ -11,20 +11,21 @@ function bfs(root, result=[], queue=[root.val]){
 
     //loop that with recursion until [] is empty
 
-    if(!queue.length) return;
+    if(!queue.length) return result;
+    if (root === null) return [];
 
     let currRoot = root;
-
-    result.push(queue.shift());
+    const val = queue[0].val;
+    queue.shift()
+    result.push(val);
 
     if(currRoot.left){
-        queue.push(currRoot.left.val);
+        queue.push(currRoot.left);
     }
     if(currRoot.right){
-        queue.push(currRoot.right.val);
+        queue.push(currRoot.right);
     }
-    return bfs(currRoot, result, queue);
-
+    return bfs(queue[0], result, queue);
 }
 
 module.exports = { bfs };
