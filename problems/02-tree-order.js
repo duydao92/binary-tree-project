@@ -3,9 +3,16 @@
 // traversal.
 
 
-const {TreeNode} = require('./01-tree-node.js')
+const {TreeNode} = require('./01-tree-node.js');
+
+
 function preOrderArray(root) {
-    // Your code here
+    if (root === null) return [];
+
+    let leftArr = preOrderArray(root.left)
+    let rightArr = preOrderArray(root.right)
+
+    return [root.val, ...leftArr, ...rightArr]
 }
 
 // Implement a function that takes the root of a Binary Tree
@@ -13,11 +20,10 @@ function preOrderArray(root) {
 // traversal.
 function inOrderArray(root) {
     if (root === null) return [];
-    // if (root === undefined) return []
 
     let leftArr = inOrderArray(root.left)
     let rightArr = inOrderArray(root.right)
-    console.log(leftArr, rightArr)
+
 
     return [...leftArr, root.val, ...rightArr]
 }
